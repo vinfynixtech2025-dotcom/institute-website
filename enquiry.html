@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinfynix - Enquiry</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>Vinfynix</h1>
+        <nav>
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/enquiry.html" class="cta-link">Enquiry</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<section class="form-section">
+    <div class="container">
+        <h2>Enquiry Form</h2>
+
+        <form id="enquiryForm">
+            <label>Full Name</label>
+            <input type="text" name="fullName" required>
+
+            <label>Mobile Number</label>
+            <input type="text" name="mobile" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Course</label>
+            <select name="course" required>
+                <option value="">Select course</option>
+                <option value="Tally">Tally Prime</option>
+                <option value="MS Office">MS Office</option>
+                <option value="Digital Marketing">Digital Marketing</option>
+            </select>
+
+            <label>Message (Optional)</label>
+            <textarea name="message"></textarea>
+
+            <button class="btn" type="submit">Submit</button>
+        </form>
+
+    </div>
+</section>
+
+<script>
+document.getElementById('enquiryForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const form = e.target;
+  const data = {
+    fullName: form.fullName.value,
+    mobile: form.mobile.value,
+    email: form.email.value,
+    course: form.course.value,
+    message: form.message.value
+  };
+  try {
+    const res = await fetch('/api/enquiry', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await res.json();
+    if (result.success) {
+      window.location.href = '/success.html';
+    } else {
+      alert('❌ Submission failed. Please try again.');
+    }
+  } catch (err) {
+    alert('Server error. Try again later.');
+  }
+});
+</script>
+
+</body>
+</html>

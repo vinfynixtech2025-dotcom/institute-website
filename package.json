@@ -1,0 +1,7 @@
+{
+  "name": "institute-website",
+  "version": "1.0.0",
+  "dependencies": {
+    "mongoose": "^7.6.1"
+  }
+}
